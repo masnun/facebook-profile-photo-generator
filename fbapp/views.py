@@ -28,7 +28,7 @@ def accounts_profile(request):
     file.write(resp['data'])
 
     background = Image.open(temp_file_name).resize(DIMENSION, Image.ANTIALIAS)
-    foreground = Image.open("resources/filter1.png").resize(DIMENSION, Image.ANTIALIAS)
+    foreground = Image.open("resources/badge.png").resize(DIMENSION, Image.ANTIALIAS)
 
     background.paste(foreground, (0, 0), foreground.convert('RGBA'))
     background.save(temp_file_name)

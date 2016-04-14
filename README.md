@@ -23,4 +23,8 @@ Once we have run the migrations and set the API keys, we can run the Django dev 
 	python manage.py runserver
 	
 
-Now visit the url - `http://localhost:8000` to see the app. 
+Now visit the url - `http://localhost:8000` to see the app.
+
+## Replacing The Image
+
+The badge is in `resources/badge.png` file. It's a PNG image with transparency. You can just replace this image with yours. Or you can hack the codes to do more fancy stuff. You can find the photo generation codes in `views.py` file, in the `accounts_profile` function.

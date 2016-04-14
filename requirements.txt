@@ -1,0 +1,12 @@
+defusedxml==0.4.1
+Django==1.9.5
+facebook-sdk==1.0.0
+oauthlib==1.0.3
+Pillow==3.2.0
+PyJWT==1.4.0
+python-social-auth==0.2.14
+python3-openid==3.0.10
+requests==2.9.1
+requests-oauthlib==0.6.1
+six==1.10.0
+wheel==0.24.0

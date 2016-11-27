@@ -3,6 +3,8 @@ import hashlib
 import os
 from PIL import Image
 
+from social.apps.django_app.default.models import UserSocialAuth
+
 from django.http.response import HttpResponse
 from django.shortcuts import render
 
@@ -10,7 +12,8 @@ DIMENSION = (480, 480)
 
 
 def home(request):
-    return render(request, "home.html")
+    users_count = UserSocialAuth.objects.all().count()
+    return render(request, "home.html", {"users_count": users_count})
 
 
 def accounts_profile(request):

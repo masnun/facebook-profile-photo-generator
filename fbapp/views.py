@@ -1,5 +1,6 @@
 import facebook
 import hashlib
+import os
 from PIL import Image
 
 from django.http.response import HttpResponse
@@ -24,13 +25,21 @@ def accounts_profile(request):
     # Store photo
     temp_file_name = "photos/" + hashlib.md5(token.encode('utf-8')).hexdigest() + ".jpg"
 
-    file = open(temp_file_name, 'wb')
-    file.write(resp['data'])
+    try:
+        file = open(temp_file_name, 'wb')
+        file.write(resp['data'])
 
-    background = Image.open(temp_file_name).resize(DIMENSION, Image.ANTIALIAS)
-    foreground = Image.open("resources/badge.png").resize(DIMENSION, Image.ANTIALIAS)
+        background = Image.open(temp_file_name).resize(DIMENSION, Image.ANTIALIAS)
+        foreground = Image.open("resources/badge.png").resize(DIMENSION, Image.ANTIALIAS)
 
-    background.paste(foreground, (0, 0), foreground.convert('RGBA'))
-    background.save(temp_file_name)
+        background.paste(foreground, (0, 0), foreground.convert('RGBA'))
+        background.save(temp_file_name)
 
-    return HttpResponse(open(temp_file_name, "rb").read(), content_type="image/jpeg")
+        response = HttpResponse(open(temp_file_name, "rb").read(), content_type="image/jpeg")
+
+        os.unlink(temp_file_name)
+
+        return response
+
+    except:
+        return HttpResponse("Sorry, an error occurred while generating your photo! Please retry later!")
